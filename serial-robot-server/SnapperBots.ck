@@ -1,19 +1,13 @@
 // SnapperBots.ck
 // Nathan Shaw
-// CalArts Music Tech
 
-// Marimbot is 0
-// Trimpbeat is 1
-// Trimpspin is 2
-// Snapperbots are 3-8
-// StringThing is 9
 
 public class SnapperBot1 extends SerialBot {
     [0,1,2,3] @=> int scl[];
 
     rescale(scl);
     
-    3 => int ID;
+    21 => int ID;
 
     IDCheck(3, "/snapperbot1") => int check;
     if (check >= 0) {

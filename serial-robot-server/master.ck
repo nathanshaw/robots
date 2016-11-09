@@ -1,5 +1,5 @@
 // master.ck
-// Eric Heep
+// based on code written by Eric Heep
 // CalArts Music Tech // MTIID4LIFE
 
 // communication classes
@@ -8,11 +8,10 @@ Machine.add(me.dir() + "/HandshakeID.ck");
 Machine.add(me.dir() + "/SerialBot.ck");
 
 // add robots here
-Machine.add(me.dir() + "/MDarimBot.ck");
-Machine.add(me.dir() + "/Trimpbeat.ck");
-Machine.add(me.dir() + "/Trimpspin.ck");
+Machine.add(me.dir() + "/Brigid.ck");
+Machine.add(me.dir() + "/Homados.ck");
+Machine.add(me.dir() + "/MiniSteps.ck");
 Machine.add(me.dir() + "/SnapperBots.ck");
-Machine.add(me.dir() + "/StringThing.ck");
 
 // main program
 Machine.add(me.dir() + "/main.ck");
