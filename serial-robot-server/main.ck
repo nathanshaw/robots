@@ -11,7 +11,6 @@ talk.talk.init();
 
 <<< "Handshakes done" >>>;
 // bring on the bots
-SnapperBot1 sb1;
 Brigid1 b1;
 Brigid2 b2;
 Brigid3 b3;
@@ -22,26 +21,33 @@ Brigid7 b7;
 Brigid8 b8;
 Brigid9 b9;
 Brigid10 b10;
-Homados1 h1;
-Homados2 h2;
-Homados3 h3;
-Homados4 h4;
-Homados5 h5;
-Homados6 h6;
-Homados7 h7;
-Homados8 h8;
-Homados9 h9;
-Homados10 h10;
-MiniSteps1 ms1;
-MiniSteps2 ms2;
-MiniSteps3 ms3;
-MiniSteps4 ms4;
-MiniSteps5 ms5;
-MiniSteps6 ms6;
-MiniSteps7 ms7;
-MiniSteps8 ms8;
-MiniSteps9 ms9;
-MiniSteps10 ms10;
+
+/*
+Homados1 homados1;
+Homados2 homados2;
+Homados3 homados3;
+Homados4 homadoes4;
+Homados5 homados5;
+Homados6 homados6;
+Homados7 homados7;
+Homados8 homados8;
+Homados9 homados9;
+Homados10 homados10;
+*/
+
+Hermes1 hermes1;
+Hermes2 hermes2;
+
+/*
+Hermes3 hermes3;
+Hermes4 hermes4;
+Hermes5 hermes5;
+Hermes6 hermes6;
+Hermes7 hermes7;
+Hermes8 hermes8;
+Hermes9 hermes9;
+Hermes10 hermes10;
+*/
 
 while (true) {
     1::second => now;
