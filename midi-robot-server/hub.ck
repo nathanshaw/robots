@@ -18,7 +18,7 @@ OscOut s_out;
 ("localhost", 50001) => s_out.dest;
 
 // addresses for hiduino-bots
-[] @=> string hiduinos[];   
+["/sampleBot"] @=> string hiduinos[];   
 
 // addresses for serial-bots
 [ "/snapperbots", "/snapperbot1", "/snapperbot2", "/snapperbot3", 
@@ -26,7 +26,12 @@ OscOut s_out;
  "/hermes1", "/hermes2", "/hermes3", "hermes4",
  "/hermes5", "/hermes6", "/hermes7", "hermes8",
  "/hermes9", "/hermes10",
-
+ "/homados1", "/homados2", "/homados3", "/homados4",
+ "/homados5", "/homados6", "/homados7", "/homados8",
+ "/homados9", "/homados10",
+ "/brigid1", "/brigid2", "/brigid3", "/brigid4", 
+ "/brigid5", "/brigid6", "/brigid7", "/brigid8", 
+ "/brigid9", "/brigid10"
  ]@=> string serials[];
 
 // checks for hiduino-bot message
