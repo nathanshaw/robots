@@ -22,6 +22,10 @@ Brigid8 b8;
 Brigid9 b9;
 Brigid10 b10;
 
+Theia1 t1;
+Theia2 t2;
+Theia3 t3;
+
 /*
 Homados1 homados1;
 Homados2 homados2;

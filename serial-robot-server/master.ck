@@ -38,6 +38,9 @@ Machine.add(me.dir() + "/Hermes7.ck");
 Machine.add(me.dir() + "/Hermes8.ck");
 Machine.add(me.dir() + "/Hermes9.ck");
 Machine.add(me.dir() + "/Hermes10.ck");
+Machine.add(me.dir() + "/Theia1.ck");
+Machine.add(me.dir() + "/Theia2.ck");
+Machine.add(me.dir() + "/Theia3.ck");
 Machine.add(me.dir() + "/SnapperBots.ck");
 
 // main program

@@ -1,6 +1,6 @@
 // hub.ck
-// Eric Heep
-// CalArts Music Tech // MTIID4LIFE
+// Nathan Villicana-Shaw
+// Divine Console
 
 // wired in
 OscIn in;
@@ -31,7 +31,8 @@ OscOut s_out;
  "/homados9", "/homados10",
  "/brigid1", "/brigid2", "/brigid3", "/brigid4", 
  "/brigid5", "/brigid6", "/brigid7", "/brigid8", 
- "/brigid9", "/brigid10"
+ "/brigid9", "/brigid10",
+ "/theia1", "/theia2", "/theia3"
  ]@=> string serials[];
 
 // checks for hiduino-bot message
