@@ -8,7 +8,7 @@ public class Theia2 extends SerialBot {
     // Theia is 51-60
 
     // MIDI notes
-    [0,1,2,3,4,5] @=> int scl[];
+    [60,61,62,63,64,65] @=> int scl[];
 
     rescale(scl);
 

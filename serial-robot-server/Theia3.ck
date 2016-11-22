@@ -8,11 +8,11 @@ public class Theia3 extends SerialBot {
     // Theia is 51-60
 
     // MIDI notes
-    [60,61,62,63,64,65] @=> int scl[];
+    [0,1,2,3,4,5] @=> int scl[];
 
     rescale(scl);
 
-    51 => int ID;
+    53 => int ID;
     "/theia3" => string address;
     IDCheck(ID, address) => int check;
     if (check >= 0) {
