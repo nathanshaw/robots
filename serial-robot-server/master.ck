@@ -6,6 +6,7 @@
 Machine.add(me.dir() + "/Handshake.ck");
 Machine.add(me.dir() + "/HandshakeID.ck");
 Machine.add(me.dir() + "/SerialBot.ck");
+Machine.add(me.dir() + "/SensorBot.ck");
 
 // add robots here
 Machine.add(me.dir() + "/Brigid1.ck");

@@ -4,6 +4,10 @@
 // CalArts Music Tech // MTIID4LIFE
 
 public class Handshake { 
+
+    OscOut out;
+    OscMsg msg;
+    ("localhost", 50003) => out.dest;
     
     SerialIO.list() @=> string list[];
     int serial_port[list.cap()];
@@ -67,20 +71,25 @@ public class Handshake {
     }
     
     // request data from arduino
-    fun int getTheiaState(int ID, int command, int vel) {
-        <<<"requesting theia state : c", command, " -id " , ID, " vel - ", vel >>>;
+    fun int getTheiaState(int ID, int command, int vel, string address) {
+        // <<<"requesting theia state : c", command, " -id " , ID, " vel - ", vel >>>;
         [255, command, 0] @=> int message[];
         253 => int distance;
-        for (int i ; i < robotID.cap(); i++) {
-            if (ID == robotID[i]){
-                <<<"sending message : ", message>>>;
-                serial[i].writeBytes(message);
-                // expect the results from 8 rangefinders
-                serial[i].onByte() => now;
-                serial[i].getByte() => distance;
-                <<< "Theia ", i , " distance is : ", distance>>>; 
-                return distance;
-            }
+        <<<"sending message : ", message[0], "-", 
+           message[1], "-", message[2]>>>;
+        (command << 2) | (vel >> 8) => message[1]; 
+        0 => message[2];
+        serial[ID].writeBytes(message);
+        // expect the results from 8 rangefinders
+        serial[ID].onByte() => now;
+        serial[ID].getByte() => distance;
+        <<< "/theia", ID , " distance is : ", distance>>>; 
+        // if someone is relativly close, pass message onto the main program
+        if (distance < 250) {
+            out.start(address);
+            out.add(command);
+            out.add(distance);
+            out.send();
         }
         return distance;
     }

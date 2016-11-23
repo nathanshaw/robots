@@ -17,6 +17,10 @@ OscOut h_out;
 OscOut s_out;
 ("localhost", 50001) => s_out.dest;
 
+// localhost out for sensor-bots 
+OscOut sensor_out;
+("localhost", 50002) => sensor_out.dest;
+
 // addresses for hiduino-bots
 ["/sampleBot"] @=> string hiduinos[];
 
@@ -31,9 +35,11 @@ OscOut s_out;
  "/homados9", "/homados10",
  "/brigid1", "/brigid2", "/brigid3", "/brigid4", 
  "/brigid5", "/brigid6", "/brigid7", "/brigid8", 
- "/brigid9", "/brigid10",
- "/theia1", "/theia2", "/theia3"
+ "/brigid9", "/brigid10"
  ]@=> string serials[];
+
+ ["/theia1", "/theia2", "/theia3"
+ ] @=> string sensors[];
 
 // checks for hiduino-bot message
 fun int hCheck(string m) {
@@ -46,7 +52,7 @@ fun int hCheck(string m) {
 }
 
 // checks for serial-bot message
-fun int sCheck(string m) {
+fun int serialsCheck(string m) {
     for (int i; i < serials.cap(); i++) {
         if (m == serials[i]) {
             return 1;
@@ -55,6 +61,15 @@ fun int sCheck(string m) {
     return 0;
 }
 
+// checks for sensor-bot message
+fun int sensorsCheck(string m) {
+    for (int i; i < sensors.cap(); i++) {
+        if (m == sensors[i]) {
+            return 1;
+        }
+    }
+    return 0;
+}
 // recieves wireless osc messages and 
 // sends them through the local host
 while (true) {
@@ -66,12 +81,18 @@ while (true) {
             h_out.add(msg.getInt(1));
             h_out.send();
         }
-        if (sCheck(msg.address)) {
+        if (serialsCheck(msg.address)) {
             s_out.start(msg.address);
             s_out.add(msg.getInt(0));
             s_out.add(msg.getInt(1));
             s_out.send();
-            <<<"sending message to serial server : ", 
+        }
+        if (sensorsCheck(msg.address)) {
+            sensor_out.start(msg.address);
+            sensor_out.add(msg.getInt(0));
+            sensor_out.add(msg.getInt(1));
+            sensor_out.send();
+            <<<"sending message to sensor server : ", 
                 msg.address, msg.getInt(0), msg.getInt(1)>>>;
         }
     }
