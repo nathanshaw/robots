@@ -18,7 +18,7 @@ OscOut s_out;
 ("localhost", 50001) => s_out.dest;
 
 // addresses for hiduino-bots
-["/sampleBot"] @=> string hiduinos[];   
+["/sampleBot"] @=> string hiduinos[];
 
 // addresses for serial-bots
 [ "/snapperbots", "/snapperbot1", "/snapperbot2", "/snapperbot3", 
@@ -71,6 +71,8 @@ while (true) {
             s_out.add(msg.getInt(0));
             s_out.add(msg.getInt(1));
             s_out.send();
+            <<<"sending message to serial server : ", 
+                msg.address, msg.getInt(0), msg.getInt(1)>>>;
         }
     }
 }

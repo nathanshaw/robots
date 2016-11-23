@@ -26,32 +26,11 @@ Theia1 t1;
 Theia2 t2;
 Theia3 t3;
 
-/*
 Homados1 homados1;
 Homados2 homados2;
-Homados3 homados3;
-Homados4 homadoes4;
-Homados5 homados5;
-Homados6 homados6;
-Homados7 homados7;
-Homados8 homados8;
-Homados9 homados9;
-Homados10 homados10;
-*/
 
 Hermes1 hermes1;
 Hermes2 hermes2;
-
-/*
-Hermes3 hermes3;
-Hermes4 hermes4;
-Hermes5 hermes5;
-Hermes6 hermes6;
-Hermes7 hermes7;
-Hermes8 hermes8;
-Hermes9 hermes9;
-Hermes10 hermes10;
-*/
 
 while (true) {
     1::second => now;

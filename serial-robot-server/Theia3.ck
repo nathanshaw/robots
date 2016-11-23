@@ -1,7 +1,7 @@
 // Theia3.ck
 // Nathan Villicana-Shaw
 
-public class Theia3 extends SerialBot {
+public class Theia3 extends SerialBot{
     // Brigid is 1-10 and 31-40
     // Homados is 10-20
     // Hermes is 21-30
@@ -14,8 +14,10 @@ public class Theia3 extends SerialBot {
 
     53 => int ID;
     "/theia3" => string address;
-    IDCheck(ID, address) => int check;
-    if (check >= 0) {
-        spork ~ oscrecv(check, address);
+    IDCheck(ID, address) => int port;
+    // <<<"theia 3 id check is : ", port>>>;
+    // if a message comes in to the bot, return the distances
+    if (port >= 0) {
+        spork ~ oscrecv(port, address);
     }
 }

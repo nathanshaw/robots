@@ -4,14 +4,14 @@
 // CalArts Music Tech // MTIID4LIFE
 
 public class Handshake { 
-
+    
     SerialIO.list() @=> string list[];
     int serial_port[list.cap()];
     
     // calls num_ports() to find how many USB ports are available
     SerialIO serial[num_ports()];
     int robotID[serial.cap()];
-
+    
     fun void init() { 
         for (int i; i < robotID.cap(); i++) {
             i => robotID[i];
@@ -19,12 +19,12 @@ public class Handshake {
         open_ports();
         handshake();
     } 
-
+    
     // returns the proper robot ID to the child class
     fun int port(int ID) {
         return serial_port[robotID[ID]];
     }
-
+    
     // returns how many usb serial connections are available
     fun int num_ports() {
         int num;
@@ -38,7 +38,7 @@ public class Handshake {
         <<< "Found", num, "available USB ports:", "" >>>;
         return num;
     }
-   
+    
     // opens only how many serial ports there are usb ports connected
     fun void open_ports() {
         for (int i; i < serial.cap(); i++) {
@@ -52,22 +52,42 @@ public class Handshake {
         <<< "-", "" >>>;
         2.5::second => now;
     }
-
+    
     // pings the Arduinos and returns their 'arduinoID'
     fun void handshake() {
         [255, 255, 255] @=> int ping[];
         for (int i ; i < serial.cap(); i++) {
-            // <<< "Testing port : ", i>>>;
+            <<< "Testing port : ", i>>>;
             serial[i].writeBytes(ping);
             serial[i].onByte() => now;
             serial[i].getByte() => int arduinoID;
-            // <<< "arduin id : ", arduinoID>>>;
+            <<< "arduin id : ", arduinoID>>>;
             arduinoID => robotID[i];
         }
     }
-
+    
+    // request data from arduino
+    fun int getTheiaState(int ID, int command, int vel) {
+        <<<"requesting theia state : c", command, " -id " , ID, " vel - ", vel >>>;
+        [255, command, 0] @=> int message[];
+        253 => int distance;
+        for (int i ; i < robotID.cap(); i++) {
+            if (ID == robotID[i]){
+                <<<"sending message : ", message>>>;
+                serial[i].writeBytes(message);
+                // expect the results from 8 rangefinders
+                serial[i].onByte() => now;
+                serial[i].getByte() => distance;
+                <<< "Theia ", i , " distance is : ", distance>>>; 
+                return distance;
+            }
+        }
+        return distance;
+    }
+    
     // bitwise operations, allows note numbers 0-63 and note velocities 0-1023
     fun void note(int ID, int num, int vel) {
+        <<<"sending note : ", ID, " - ", num, " - ", vel>>>;
         int bytes[3];
         0xff => bytes[0];
         (num << 2) | (vel >> 8) => bytes[1]; 
