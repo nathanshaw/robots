@@ -5,6 +5,7 @@
 
 public class Handshake { 
 
+    // for sending sensor data to clients
     OscOut out;
     OscMsg msg;
     ("localhost", 50003) => out.dest;
@@ -72,20 +73,21 @@ public class Handshake {
     
     // request data from arduino
     fun int getTheiaState(int ID, int command, int vel, string address) {
-        // <<<"requesting theia state : c", command, " -id " , ID, " vel - ", vel >>>;
         [255, command, 0] @=> int message[];
         253 => int distance;
-        <<<"sending message : ", message[0], "-", 
-           message[1], "-", message[2]>>>;
         (command << 2) | (vel >> 8) => message[1]; 
-        0 => message[2];
+        <<<ID, " sending message : ", message[0], "-", 
+           message[1], "-", message[2]>>>;
         serial[ID].writeBytes(message);
         // expect the results from 8 rangefinders
         serial[ID].onByte() => now;
+        serial[ID].getByte() => int parity;
+        serial[ID].onByte() => now;
         serial[ID].getByte() => distance;
-        <<< "/theia", ID , " distance is : ", distance>>>; 
-        // if someone is relativly close, pass message onto the main program
-        if (distance < 250) {
+        <<<"incomming parity : ", parity, " Distance : ", distance>>>;
+        if (parity == 0xFF) {
+            <<<address , " distance is : ", distance, " command is : ", command>>>; 
+            // if someone is relativly close, pass message onto the main program
             out.start(address);
             out.add(command);
             out.add(distance);

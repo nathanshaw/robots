@@ -11,26 +11,22 @@ talk.talk.init();
 
 <<< "Handshakes done" >>>;
 // bring on the bots
-Brigid1 b1;
-Brigid2 b2;
-Brigid3 b3;
+//Brigid1 b1;
+//Brigid2 b2;
+//Brigid3 b3;
 Brigid4 b4;
 Brigid5 b5;
 Brigid6 b6;
 Brigid7 b7;
 Brigid8 b8;
-Brigid9 b9;
-Brigid10 b10;
+//Brigid9 b9;
+//Brigid10 b10;
 
 Theia1 t1;
-Theia2 t2;
-Theia3 t3;
+//Theia2 t2;
+//Theia3 t3;
 
-Homados1 homados1;
-Homados2 homados2;
-
-Hermes1 hermes1;
-Hermes2 hermes2;
+//Hermes1 hermes1;
 
 while (true) {
     1::second => now;

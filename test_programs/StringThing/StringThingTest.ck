@@ -22,7 +22,7 @@ while(true) {
     // 2 - 4 are pick spinners (2 is broken)
     for(0 => int i; i < 5; i++){
         100 => int vel;
-        1500 => int msDur;
+        150 => int msDur;
         <<< "StringThing:", i, " - ", vel >>>;
         stPlay(i, vel, msDur);
     }

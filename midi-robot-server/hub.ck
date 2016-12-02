@@ -9,10 +9,6 @@ OscMsg msg;
 50000 => in.port;
 in.listenAll();
 
-// localhost out for hiduino-bots
-OscOut h_out;
-("localhost", 11235) => h_out.dest;
-
 // localhost out for serial-bots 
 OscOut s_out;
 ("localhost", 50001) => s_out.dest;
@@ -20,9 +16,6 @@ OscOut s_out;
 // localhost out for sensor-bots 
 OscOut sensor_out;
 ("localhost", 50002) => sensor_out.dest;
-
-// addresses for hiduino-bots
-["/sampleBot"] @=> string hiduinos[];
 
 // addresses for serial-bots
 [ "/snapperbots", "/snapperbot1", "/snapperbot2", "/snapperbot3", 
@@ -35,21 +28,12 @@ OscOut sensor_out;
  "/homados9", "/homados10",
  "/brigid1", "/brigid2", "/brigid3", "/brigid4", 
  "/brigid5", "/brigid6", "/brigid7", "/brigid8", 
- "/brigid9", "/brigid10"
+ "/brigid9", "/brigid10" 
  ]@=> string serials[];
 
  ["/theia1", "/theia2", "/theia3"
  ] @=> string sensors[];
 
-// checks for hiduino-bot message
-fun int hCheck(string m) {
-    for (int i; i < hiduinos.cap(); i++) {
-        if (m == hiduinos[i]) {
-            return 1;
-        }
-    }
-    return 0;
-}
 
 // checks for serial-bot message
 fun int serialsCheck(string m) {
@@ -75,17 +59,13 @@ fun int sensorsCheck(string m) {
 while (true) {
     in => now;
     while (in.recv(msg)) { 
-        if (hCheck(msg.address)) {
-            h_out.start(msg.address);
-            h_out.add(msg.getInt(0));
-            h_out.add(msg.getInt(1));
-            h_out.send();
-        }
         if (serialsCheck(msg.address)) {
             s_out.start(msg.address);
             s_out.add(msg.getInt(0));
             s_out.add(msg.getInt(1));
             s_out.send();
+            <<<"forwarding message to bots : ", msg.address, msg.getInt(0),
+               msg.getInt(1)>>>;
         }
         if (sensorsCheck(msg.address)) {
             sensor_out.start(msg.address);
@@ -93,7 +73,7 @@ while (true) {
             sensor_out.add(msg.getInt(1));
             sensor_out.send();
             <<<"sending message to sensor server : ", 
-                msg.address, msg.getInt(0), msg.getInt(1)>>>;
+               msg.address, msg.getInt(0), msg.getInt(1)>>>;
         }
     }
 }

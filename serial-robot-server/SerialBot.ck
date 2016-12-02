@@ -73,40 +73,44 @@ public class SerialBot {
     
     // receives OSC and sends out serial
     fun void oscrecv(int port, string address) {
+        <<<"oscrecv started : ", port, " ", address>>>;
         if (address == "/theia1" | address == "/theia2" | address == "/theia3"){
             <<<"-- Creating osc receiver at port : ", port, " and address : ", address>>>;
             while(true) {
             oin => now;
             while (oin.recv(msg)) {
-                <<<"received message : ", msg>>>;
-                if (msg.address == address) {
-                    renote(msg.getInt(0)) => int note;
-                    <<<"requesting sensor data : ", port, " ", 
-                        note, " ", msg.getInt(1)>>>;
+                msg.address => string in_address;
+                if (in_address == address) {
+                    msg.getInt(0) => int note;
+                    msg.getInt(1) => int filler;
+                    <<<"received theia message : ", in_address, "- ", note, " ", 
+                        filler>>>;
                     if (note >= 0) {
-                        talk.talk.getTheiaState(port, note, msg.getInt(1), address);
+                        talk.talk.getTheiaState(port, note, filler, address);
                     }
                     else {
-                        <<< msg.getInt(0), "is not an accepted note number for", address, "" >>>;
+                        <<< note, "is not an accepted note number for", address, "" >>>;
                     }
                 }
             }
         }
         }
         else {
+        <<<"Creating osc receiver at port : ", port, " and address : ", address>>>;
         while (true) {
-            <<<"Creating osc receiver at port : ", port, " and address : ", address>>>;
             oin => now;
             while (oin.recv(msg)) {
-                <<<"received message : ", msg>>>;
+                msg.address => string address;
+                renote(msg.getInt(0)) => int note;
+                msg.getInt(1) => int vel;
+                //<<<"received message : ", address, " - ", note, " - ", vel>>>;
                 if (msg.address == address) {
-                    renote(msg.getInt(0)) => int note;
                     <<<"sending regular note : ", port, " ", note, " ", msg.getInt(1)>>>;
                     if (note >= 0) {
                         talk.talk.note(port, note, msg.getInt(1));
                     }
                     else {
-                        <<< msg.getInt(0), "is not an accepted note number for", address, "" >>>;
+                        <<< note, "is not an accepted note number for", address, "" >>>;
                     }
                 }
             }
