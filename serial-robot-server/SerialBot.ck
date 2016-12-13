@@ -9,6 +9,7 @@ public class SerialBot {
     OscIn oin;
     OscMsg msg;
     
+    string myAddress;
     // new port number
     50001 => oin.port;
     oin.listenAll();
@@ -62,6 +63,7 @@ public class SerialBot {
         for (int i; i < talk.talk.robotID.cap(); i++) {
             if (arduinoID == talk.talk.robotID[i]) {
                 <<< address, "connected!", i >>>;
+                address => myAddress;;
                 i => check;
             }
         }
@@ -74,29 +76,6 @@ public class SerialBot {
     // receives OSC and sends out serial
     fun void oscrecv(int port, string address) {
         <<<"oscrecv started : ", port, " ", address>>>;
-        if (address == "/theia1" | address == "/theia2" | address == "/theia3"){
-            <<<"-- Creating osc receiver at port : ", port, " and address : ", address>>>;
-            while(true) {
-            oin => now;
-            while (oin.recv(msg)) {
-                msg.address => string in_address;
-                if (in_address == address) {
-                    msg.getInt(0) => int note;
-                    msg.getInt(1) => int filler;
-                    <<<"received theia message : ", in_address, "- ", note, " ", 
-                        filler>>>;
-                    if (note >= 0) {
-                        talk.talk.getTheiaState(port, note, filler, address);
-                    }
-                    else {
-                        <<< note, "is not an accepted note number for", address, "" >>>;
-                    }
-                }
-            }
-        }
-        }
-        else {
-        <<<"Creating osc receiver at port : ", port, " and address : ", address>>>;
         while (true) {
             oin => now;
             while (oin.recv(msg)) {
@@ -104,8 +83,10 @@ public class SerialBot {
                 renote(msg.getInt(0)) => int note;
                 msg.getInt(1) => int vel;
                 //<<<"received message : ", address, " - ", note, " - ", vel>>>;
-                if (msg.address == address) {
-                    <<<"sending regular note : ", port, " ", note, " ", msg.getInt(1)>>>;
+                //<<<"myAddress : ", myAddress, " Address : ", address>>>;
+                if (myAddress == address) {
+                    //<<<"ADDRESSES MATCH!!!!!!!">>>;
+                    // <<<"sending regular note : ", port, " ", note, " ", msg.getInt(1)>>>;
                     if (note >= 0) {
                         talk.talk.note(port, note, msg.getInt(1));
                     }
@@ -116,5 +97,4 @@ public class SerialBot {
             }
         }
         }
-    }
 }

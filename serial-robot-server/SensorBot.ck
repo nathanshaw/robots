@@ -79,7 +79,7 @@ public class SensorBot {
             while (oin.recv(msg)) {
                 if (msg.address == address) {
                     renote(msg.getInt(0)) => int note;
-                    <<<"requesting sensor data : ", port, " ", 
+                    <<<"requesting sensor data : ", address, " ", 
                         note, " ", msg.getInt(1)>>>;
                     int data;
                     if (note >= 0) {

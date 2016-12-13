@@ -62,11 +62,10 @@ public class Handshake {
     fun void handshake() {
         [255, 255, 255] @=> int ping[];
         for (int i ; i < serial.cap(); i++) {
-            <<< "Testing port : ", i>>>;
             serial[i].writeBytes(ping);
             serial[i].onByte() => now;
             serial[i].getByte() => int arduinoID;
-            <<< "arduin id : ", arduinoID>>>;
+            <<<"Port ", i, "has arduino id : ", arduinoID>>>;
             arduinoID => robotID[i];
         }
     }
@@ -76,15 +75,15 @@ public class Handshake {
         [255, command, 0] @=> int message[];
         253 => int distance;
         (command << 2) | (vel >> 8) => message[1]; 
-        <<<ID, " sending message : ", message[0], "-", 
-           message[1], "-", message[2]>>>;
+        // <<<ID, " sending message : ", message[0], "-", 
+        //   message[1], "-", message[2]>>>;
         serial[ID].writeBytes(message);
         // expect the results from 8 rangefinders
         serial[ID].onByte() => now;
         serial[ID].getByte() => int parity;
         serial[ID].onByte() => now;
         serial[ID].getByte() => distance;
-        <<<"incomming parity : ", parity, " Distance : ", distance>>>;
+        //<<<"incomming parity : ", parity, " Distance : ", distance>>>;
         if (parity == 0xFF) {
             <<<address , " distance is : ", distance, " command is : ", command>>>; 
             // if someone is relativly close, pass message onto the main program

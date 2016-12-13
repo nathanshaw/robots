@@ -11,9 +11,9 @@ talk.talk.init();
 
 <<< "Handshakes done" >>>;
 // bring on the bots
-//Brigid1 b1;
-//Brigid2 b2;
-//Brigid3 b3;
+Brigid1 b1;
+Brigid2 b2;
+Brigid3 b3;
 Brigid4 b4;
 Brigid5 b5;
 Brigid6 b6;

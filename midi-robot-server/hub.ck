@@ -64,16 +64,16 @@ while (true) {
             s_out.add(msg.getInt(0));
             s_out.add(msg.getInt(1));
             s_out.send();
-            <<<"forwarding message to bots : ", msg.address, msg.getInt(0),
-               msg.getInt(1)>>>;
+            //<<<"forwarding message to bots : ", msg.address, msg.getInt(0),
+            //   msg.getInt(1)>>>;
         }
         if (sensorsCheck(msg.address)) {
             sensor_out.start(msg.address);
             sensor_out.add(msg.getInt(0));
             sensor_out.add(msg.getInt(1));
             sensor_out.send();
-            <<<"sending message to sensor server : ", 
-               msg.address, msg.getInt(0), msg.getInt(1)>>>;
+            //<<<"sending message to sensor server : ", 
+            //   msg.address, msg.getInt(0), msg.getInt(1)>>>;
         }
     }
 }
