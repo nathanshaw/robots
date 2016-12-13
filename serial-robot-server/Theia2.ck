@@ -1,7 +1,7 @@
 // Theia2.ck
 // Nathan Villicana-Shaw
 
-public class Theia2 extends SerialBot{
+public class Theia2 extends SensorBot{
     // Brigid is 1-10 and 31-40
     // Homados is 10-20
     // Hermes is 21-30
