@@ -85,7 +85,7 @@ public class Handshake {
         serial[ID].getByte() => distance;
         //<<<"incomming parity : ", parity, " Distance : ", distance>>>;
         if (parity == 0xFF) {
-            <<<address , " distance is : ", distance, " command is : ", command>>>; 
+            //<<<address , " distance is : ", distance, " command is : ", command>>>; 
             // if someone is relativly close, pass message onto the main program
             out.start(address);
             out.add(command);
